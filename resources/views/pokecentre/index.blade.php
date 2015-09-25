@@ -15,8 +15,12 @@
 		<h2>Global Stats</h2>
 		<ul>
 			<li>Total Registered Trainers: {{ $totalTrainers }}</li>
+			<li>Total Captures: {{ $totalGlobalCaptures }}</li>
 		</ul>
-		<a href="/pokecentre/capture" class="tiny button"></a>
+
+		<a href="/pokecentre/capture" class="tiny button">Add your capture</a>
+		<a href="/pokecentre/captures" class="tiny button">See your captures ({{ $totalTrainerCaptures }})</a>
+		
 	</div>
 </div>
 

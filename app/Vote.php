@@ -4,11 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pokemon extends Model
+class Vote extends Model
 {
-    public $table = 'pokemon';
     public $timestamps = false;
-    public function capture() {
+
+    public function user()
+    {
+    	return $this->belongsTo('App\user');
+    }
+
+    public function capture()
+    {
     	return $this->hasMany('App\Capture');
     }
+
 }

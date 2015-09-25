@@ -9,6 +9,23 @@ use App\Pokemon;
 
 class PokedexController extends Controller
 {
+    public function vote($id, $userVote)
+    {
+        // Make sure the capture is real and the vote is valid 
+
+        $vote = new \App\Vote();
+        $vote->user_id = \Auth::user()->id;
+        $vote->capture_id = $id;
+        $vote->vote = $userVote == 'up' ? 'true' : 'false';
+
+        $vote->save();
+
+        $capture = \App\Capture::findOrFail($id);
+
+        return redirect('pokedex/'.$capture->pokemon->name);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,12 +66,13 @@ class PokedexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name)
     {
         // Get additional info about the pokemon 
-        $info = Pokemon::where('name', $name)->firstOrFail();
+        $pokemon = Pokemon::where('name', $name)->firstOrFail();
 
-        return view('pokedex.show',compact('info'));
+        return view('pokedex.show', compact('pokemon'));
+        
     }
 
     /**
